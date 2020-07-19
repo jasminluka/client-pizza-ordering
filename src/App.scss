@@ -1,0 +1,1957 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+// VARIABLES
+
+$white: #fff;
+$lightenBlack: lighten($color: #000000, $amount: 15);
+$lightenOrange: lighten($color: #ff5100, $amount: 5);
+$darkenOrange: darken($color: $lightenOrange, $amount: 10);
+$headerColor: #f7f7f7;
+$darkenHeaderColor: darken($headerColor, $amount: 10);
+$grey: #f0f0f0;
+$darkenGrey: darken($color: $grey, $amount: 5);
+$red: red;
+$lightenRed: lighten($color: $red, $amount: 15);
+
+
+// GLOBALS
+.btn {
+  width: 150px;
+  padding: 10px 20px;
+  text-align: center;
+  background: $lightenOrange;
+  color: $white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    background: $darkenOrange;
+  }
+}
+
+
+.card-btn {
+  position: relative;
+  width: 50%;
+  padding: 10px 20px;
+  margin: 0 10px;
+  text-align: center;
+  background: $lightenOrange;
+  color: $white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: .3s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $darkenOrange;
+    transform: scaleX(0);
+    transform-origin: right;
+    z-index: -1;
+    transition: transform .3s;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+
+.go-back-link {
+  position: relative;
+  display: block;
+  margin: 50px 0;
+  color: $darkenOrange;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    height: 2px;
+    background: $darkenOrange;
+  }
+}
+
+
+// ALERT
+
+.alert {
+  position: fixed;
+  top: 100px;
+  left: 100%;
+  height: 80px;
+  padding: 0 30px 0 90px;
+  background: lighten($color: green, $amount: 55);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+  transition: .3s;
+
+  &.active {
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+  }
+  
+  .img {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    img {
+      width: 100%;
+    }
+  }
+
+  p {
+    color: $lightenBlack;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-align: center;
+
+    &::first-letter {
+      text-transform: uppercase;
+      word-wrap: wrap;
+    }
+  }
+}
+
+
+// NAVBAR
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  padding: 0 60px;
+  background: $white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: .5s;
+
+  &.active {
+    height: 60px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+
+    li {
+      position: relative;
+      margin: 0 25px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        position: relative;
+        color: $lightenBlack;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+
+        &.link::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 55%;
+          height: 2px;
+          transform: scaleX(0);
+          transform-origin: left;
+          background: $lightenBlack;
+          pointer-events: none;
+          transition: .3s;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+        }
+      }
+
+      .badge {
+        position: absolute;
+        top: -20px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        color: $white;
+        background: $darkenOrange;
+        font-size: .8rem;
+        font-weight: 700;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+
+// HEADER
+
+header {
+  height: 100vh;
+  width: 100%;
+  background: $headerColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .description {
+    width: 55%;
+    height: 170px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    h3 {
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      color: $lightenBlack;
+      margin-bottom: 25px;
+    }
+  }
+
+  .image {
+    width: 45%;
+    padding-top: 70px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+
+// OUR MENU
+
+.menu-section {
+  width: 100%;
+
+  h2 {
+    position: relative;
+    text-align: center;
+    width: 250px;
+    margin: auto;
+    font-size: 2.4rem;
+    letter-spacing: 4px;
+    color: $lightenBlack;
+    padding-top: 30px;
+    margin-bottom: 80px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 3px;
+      background: $lightenBlack;
+    }
+  }
+}
+
+.grid {
+  width: 100%;
+  padding: 0 70px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 50px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 15px;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+
+  .pizza-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .details {
+    height: 245px;
+    text-align: center;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .ingredients {
+      padding-top: 10px;
+      font-size: .9rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-around;
+
+      .prices {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .size {
+          padding: 5px 12px;
+          color: $lightenBlack;
+          background: $headerColor;
+          border: none;
+          border-radius: 50px;
+          font-size: .7rem;
+          font-weight: 300;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+  
+        h3 {
+          height: 80px;
+          font-size: 1.2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+  
+          button {
+            padding: 5px 10px;
+            font-size: .9rem;
+            color: $lightenOrange;
+            background: $white;
+            letter-spacing: 2px;
+            border: 1px solid $lightenOrange;
+            border-radius: 25px;
+            transition: .5s;
+            cursor: pointer;
+
+            &:hover {
+              color: $white;
+              background: $lightenOrange;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .remove-btn {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    background: $lightenOrange;
+    color: $white;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+      background: $darkenOrange;
+    }
+  }
+
+  .modal-remove-pizza {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $lightenBlack;
+    background: rgba(0, 0, 0, .3);
+    z-index: 2000;
+    overflow: hidden;
+  
+    .modal-wrapper {
+      padding: 25px;
+      background: $headerColor;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        letter-spacing: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+    
+      .btns {
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: auto;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+
+        .btn-back {
+          background: $grey;
+          color: $lightenBlack;
+    
+          &::after {
+            background: $darkenGrey;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// CART
+
+.cart-section {
+  width: 100%;
+  padding-top: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .cart {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .head {
+      width: 100%;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        &:nth-child(1) {
+          width: 40%;
+          padding-left: 5%;
+        }
+        
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4) {
+          width: 20%;
+        }
+  
+        &:nth-child(3),
+        &:nth-child(4) {
+          text-align: center;
+        }
+      }
+    }
+
+    .pizzas {
+      width: 100%;
+      
+      .cart-item {
+        padding: 10px 20px;
+        border-bottom: 1px solid $darkenHeaderColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:nth-child(even) {
+          background: $headerColor;
+        }
+
+        .remove {
+          width: 5%;
+        }
+
+        .name {
+          width: 35%;
+        }
+
+        .amount {
+          width: 20%;
+
+          button {
+            margin: 0 10px;
+          }
+        }
+
+        .price,
+        .total {
+          width: 20%;
+          text-align: center;
+        }
+
+        button {
+          padding: 4px 8px;
+          border-radius: 50%;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: .3s;
+
+          &:hover {
+            background: $lightenBlack;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .clear-cart {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        button {
+          border: none;
+          background: $red;
+
+          &:hover {
+            background: $lightenRed;
+          }
+        }
+      }
+      
+      .totals {
+        width: 20%;
+
+        p {
+          font-weight: 700;
+          text-align: center;
+        }
+      }
+    }
+
+    .payment {
+      width: 100%;
+
+      .payment-link {
+        float: right;
+        position: relative;
+        transform: perspective(500px) rotateY(-15deg);
+        width: 250px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-shadow: 6px 3px 2px rgba(0,0,0,.2);
+        background: linear-gradient(90deg, $lightenOrange, #e91ea5);
+        color: $white;
+        border-radius: 25px;
+        border-color: $headerColor;
+        cursor: pointer;
+        transition: .5s;
+        overflow: hidden;
+  
+        &:hover {
+          transform: perspective(500px) rotateY(15deg);
+          text-shadow: -6px 3px 2px rgba(0,0,0,.2);
+        }
+  
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, $white, transparent);
+          transition: .5s;
+        }
+  
+        &:hover::before {
+          left: 100%;
+        }
+      }
+    }
+
+    .empty {
+      text-align: center;
+      
+      h1 {
+        color: $lightenBlack;
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+      }
+
+      img {
+        width: 300px;
+        margin: 50px 0;
+      }
+    }
+  }
+}
+
+.user-details, .confirm, .pizza-form, .all-orders, .my-orders, .order  {
+  width: 100%;
+  padding-top: 85px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+// USER DETAILS
+
+.form-card {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 15px;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+
+  .header {
+    border-bottom: 1px solid $grey;
+    color: $lightenBlack;
+    background: $headerColor;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px 40px;
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+    }
+  }
+
+  .form {
+    padding: 30px 40px;
+
+    &-control {
+      position: relative;
+      margin-bottom: 10px;
+      padding-bottom: 20px;
+
+      label {
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        border: 2px solid $grey;
+        border-radius: 4px;
+        display: block;
+        font-family: inherit;
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+      }
+
+      small {
+        color: $darkenOrange;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .card-buttons {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-around;
+
+    .btn-confirm:disabled,
+    .btn-confirm[disabled] {
+      background: $lightenBlack;
+      cursor: not-allowed;
+
+      &:hover {
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .btn-back {
+      background: $grey;
+      color: $lightenBlack;
+
+      &::after {
+        background: $darkenGrey;
+      }
+    }
+  }
+}
+
+
+// CONFIRM
+
+.confirm-card {
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 15px;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+
+  .header {
+    border-bottom: 1px solid $grey;
+    color: $lightenBlack;
+    background: $headerColor;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px 40px;
+    text-align: center;
+    
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+    }
+  }
+
+  .body {
+    padding: 30px 40px;
+
+    .user-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      margin-bottom: 10px;
+      color: $lightenBlack;
+
+      &:nth-of-type(3) {
+        border-bottom: 1px solid $grey;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+      }
+    }
+
+    .pizzas-container {
+      margin-top: 20px;
+
+      .pizza-item {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+  
+        h3 {
+          width: 50%;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        p {
+          width: 10%;
+          text-align: center;
+        }
+  
+        h2 {
+          width: 40%;
+          font-size: 1.1rem;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-align: end;
+        }
+      }
+    }
+
+    .total-price {
+      margin-top: 40px;
+      display: flex;
+      justify-content: flex-end;
+
+      div {
+        position: relative;
+        margin-left: 25px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: $grey;
+        }
+
+        h3 {
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+  
+        h2 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          letter-spacing: 2px;
+        }
+      }
+    }
+    .card-buttons {
+      margin-top: 50px;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-around;
+
+      .btn-back {
+        background: $grey;
+        color: $lightenBlack;
+    
+        &::after {
+          background: $darkenGrey;
+        }
+      }
+    }
+  }
+}
+
+
+// SUCCESS
+
+.success {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $lightenBlack;
+  background: rgba(0, 0, 0, .3);
+  z-index: 2000;
+  overflow: hidden;
+
+  div {
+    width: 70%;
+    padding: 25px;
+    background: $headerColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 200px;
+      margin-bottom: 25px;
+    }
+  
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    h2 {
+      width: 70%;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+  
+    a {
+      width: auto;
+      margin-top: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+}
+
+
+// LOGIN / REGISTER
+.login-register {
+  width: 100%;
+  height: 100vh;
+  background: $headerColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  .container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2), 
+    0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    overflow: hidden;
+
+    h1 {
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 100;
+      line-height: 1.5;
+      letter-spacing: 2px;
+      margin: 20px 0 40px;
+    }
+
+    button,
+    input[type='submit'] {
+      border-radius: 20px;
+      border: 1px solid #ff4b2b;
+      background: #ff4b2b;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 12px 45px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 80ms ease-in;
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &:disabled,
+      &[disabled] {
+        background: lighten($color: #ff4b2b, $amount: 20);
+        cursor: not-allowed;
+      }
+
+      &.ghost {
+        background: transparent;
+        border-color: #fff;
+      }
+    }
+
+    .form-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      transition: all .6s ease-in-out;
+
+      &.login {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+      }
+
+      &.register {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      form {
+        position: relative;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 50px;
+        height: 100%;
+
+        h1 {
+          margin-bottom: 20px;
+        }
+  
+        .input-box {
+          position: relative;
+          width: 100%;
+          margin-bottom: 10px;
+          padding-bottom: 20px;
+          
+          input {
+            background: #eee;
+            border: none;
+            padding: 12px 15px;
+            width: 100%;
+          }
+
+          small {
+            color: #ff416c;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }
+        }
+
+        input[type='submit'] {
+          margin-top: 30px;
+        }
+
+        .error {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: #ff416c;
+          border-bottom: 1px solid #ff416c;
+          font-size: .9rem;
+          font-weight: 500;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .overlay-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      transition: transform .6s ease-in-out;
+      z-index: 100;
+      overflow: hidden;
+
+      .overlay {
+        background: #ff416c;
+        background: linear-gradient(to right, #ff4b2b, #ff416c) no-repeat 0 0 / cover;
+        color: #fff;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform .6s ease-in-out;
+
+        .overlay-panel {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: 50%;
+          padding: 0 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          transform: translateX(0);
+          transition: transform .6s ease-in-out;
+
+          &.overlay-right {
+            right: 0;
+            transform: translateX(0);
+          }
+
+          &.overlay-left {
+            transform: translateX(-20%);
+          }
+        }
+      }
+    }
+
+    // ANIMATIONS
+    /* Move login to the right */
+    &.register-active {
+      .login {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      /* Bring sign up over sign in */
+      .register {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+      }
+
+      /* Move overlay to left */
+      .overlay-container {
+        transform: translateX(-100%);
+        
+        /* Move overlay back to the right */
+        .overlay {
+          transform: translateX(50%);
+  
+          .overlay-left {
+            transform: translateX(0);
+          }
+    
+          .overlay-right {
+            transform: translateX(20%);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// PIZZA FORM
+
+.wider {
+  width: 500px;
+}
+
+.successfully-added-pizza {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $lightenBlack;
+  background: rgba(0, 0, 0, .3);
+  z-index: 2000;
+  overflow: hidden;
+
+  .success-wrapper {
+    padding: 25px;
+    background: $headerColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 200px;
+      margin-bottom: 25px;
+    }
+  
+    h1 {
+      width: 85%;
+      font-size: 2.5rem;
+      text-align: center;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    .btns {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+
+      a, button {
+        width: auto;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+
+// ALL ORDERS
+
+.all-orders, .order {
+  flex-direction: column;
+
+  .pizza-item h3 {
+    text-transform: capitalize;
+  }
+}
+
+
+// MY ORDERS
+
+.my-orders {
+  .orders {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .my-orders-head {
+      width: 100%;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-start;
+
+      p {
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+
+        &:nth-child(1) {
+          width: 50%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
+
+    .order-list {
+      width: 100%;
+      
+      .my-order {
+        padding: 10px 20px;
+        border-bottom: 1px solid $darkenHeaderColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:nth-child(even) {
+          background: $headerColor;
+        }
+
+        .name {
+          width: 25%;
+        }
+
+        .amount {
+          width: 25%;
+        }
+
+        .price {
+          width: 25%;
+          text-align: center;
+        }
+
+        a {
+          position: relative;
+          width: 25%;
+          font-size: 1.1rem;
+          letter-spacing: 2px;
+          text-align: center;
+          color: $lightenBlack;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 50%;
+            height: 1px;
+            background: $lightenBlack;
+            transform: translateX(-50%) scaleX(1);
+            transform-origin: left;
+            transition: transform .3s;
+          }
+
+          &:hover::after {
+            transform: translateX(-50%) scaleX(0);
+            transform-origin: right;
+          }
+        }
+      }
+    }
+
+    .empty {
+      text-align: center;
+      
+      h1 {
+        color: $lightenBlack;
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+      }
+
+      img {
+        width: 300px;
+        margin: 50px 0;
+      }
+    }
+  }
+}
+
+
+
+// MEDIA QUERIES
+@media only screen and (max-width: 830px) {
+  .alert {
+    .img {
+      width: 30px;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  nav {
+    padding: 0 30px;
+
+    .menu li {
+      a {
+        font-size: .9rem;
+        letter-spacing: 1px;
+
+        img {
+          width: 25px;
+        }
+      }
+      .badge {
+        top: -13px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        font-weight: 500;
+        line-height: 15px;
+      }
+    }
+  }
+
+  header {
+    flex-direction: column;
+    justify-content: center;
+
+    .description {
+      width: 45%;
+      padding: 0;
+      margin-left: -30px;
+      align-items: center;
+    }
+  }
+
+  .grid {
+    width: 70%;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 500px));
+
+    .card {
+      .pizza-image {
+        width: 80%;
+        margin: auto;
+      }
+    }
+  }
+
+  .cart-section .cart {
+    width: 90%;
+
+    .pizzas .cart-item button {
+      padding: 2px 4px;
+    }
+  }
+
+  .confirm {
+    .confirm-card {
+      width: 550px;
+    }
+  }
+
+  .my-orders {
+    .orders {
+      width: 90%;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 660px) {
+  .alert {
+    width: 75%;
+    .img {
+      width: 30px;
+    }
+    p {
+      font-size: .9rem;
+    }
+  }
+
+  nav {
+    padding: 0 20px;
+
+    .menu li {
+      margin: 0 10px;
+
+      a {
+        font-size: .7rem;
+        letter-spacing: 0;
+
+        img {
+          width: 20px;
+        }
+      }
+    }
+  }
+
+  header {
+    .description {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    .image {
+      width: 55%;
+    }
+  }
+
+  .grid {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    .card {
+      .remove-btn {
+        font-size: .9rem;
+      }
+
+      .modal-remove-pizza {
+        .modal-wrapper {
+          h1 {
+            font-size: 1.7rem;
+          }
+          h3 {
+            width: 85%;
+            font-size: .9rem;
+          }
+          button {
+            padding: 5px 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .cart-section .cart {
+    .head {
+      p {
+        font-size: .8rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+    }
+    .pizzas .cart-item {
+      padding: 10px 10px;
+      button {
+        padding: 1px 2px;
+        font-size: .7rem;
+      }
+      .name {
+        text-align: center;
+        font-size: .8rem;
+      }
+      .amount {
+        width: 25%;
+        font-size: .8rem;
+      }
+      .price, .total {
+        font-size: .8rem;
+      }
+    }
+  }
+
+  .confirm {
+    .confirm-card {
+      width: 390px;
+
+      .header {
+        padding: 20px 20px;
+      }
+
+      .body {
+        padding: 20px 20px;
+
+        .user-info {
+          h3 {
+            font-size: .9rem;
+          }
+          h2 {
+            font-size: 1.1rem;
+          }
+        }
+        .pizzas-container {
+          .pizza-item {
+            h3 {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .success {
+    div {
+      img {
+        width: 100px;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      h2 {
+        width: 95%;
+        font-size: .9rem;
+      }
+      a {
+        font-size: .7rem;
+      }
+    }
+  }
+
+  .login-register {
+    .container {
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      p {
+        font-size: .8rem;
+        letter-spacing: 1px;
+      }
+      .form-container {
+        form {
+          padding: 0 10px;
+
+          .input-box {
+            input {
+              padding: 12px 10px;
+              font-size: .8rem;
+            }
+  
+            small {
+              font-size: .7rem;
+            }
+          }
+
+          .error {
+            width: 70%;
+            font-size: .8rem;
+          }
+        }
+      }
+      .overlay-container {
+        .overlay {
+          .overlay-panel {
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .wider {
+    width: 370px;
+  }
+
+  .successfully-added-pizza {
+    .success-wrapper {
+      img {
+        width: 100px;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      a, button {
+        padding: 5px 10px;
+        font-size: .7rem;
+      }
+    }
+  }
+
+  .my-orders {
+    .orders {
+      .my-orders-head {
+        p {
+          font-size: .8rem;
+          font-weight: 500;
+          letter-spacing: 1px;
+        }
+      }
+      .order-list {
+        .my-order {
+          .name {
+            font-size: .9rem;
+          }
+          .amount {
+            font-size: .9rem;
+          }
+          .price {
+            font-size: .9rem;
+          }
+          a {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 400px) {
+  .alert {
+    width: 90%;
+
+    p {
+      font-size: .7rem;
+    }
+  }
+
+  nav {
+    padding: 0 10px;
+
+    .logo {
+      a img {
+        width: 70px;
+      }
+    }
+  }
+
+  header {
+    .description {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+    .image {
+      width: 65%;
+    }
+  }
+
+  .grid {
+    padding: 0 20px;
+
+    .card {
+      .remove-btn {
+        width: 70%;
+        padding: 5px 5px;
+        font-size: .7rem;
+      }
+
+      .modal-remove-pizza {
+        .modal-wrapper {
+          h1 {
+            font-size: 1.4rem;
+          }
+          h3 {
+            font-size: .8rem;
+          }
+          button {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .cart-section .cart {
+    .head {
+      p {
+        font-size: .6rem;
+        letter-spacing: 0;
+      }
+    }
+    .pizzas .cart-item {
+      button {
+        font-size: .6rem;
+      }
+      .name {
+        text-align: center;
+      }
+      .amount {
+        width: 31%;
+        font-size: .7rem;
+      }
+      .price, .total {
+        font-size: .7rem;
+      }
+    }
+    .bottom {
+      .clear-cart {
+        .btn {
+          width: 100px;
+          padding: 4px 8px;
+          font-size: .9rem;
+        }
+      }
+      .totals {
+        p {
+          font-size: .8rem;
+          font-weight: 600;
+        }
+      }
+    }
+    .payment {
+      .payment-link {
+        width: 180px;
+        font-size: .8rem;
+      }
+    }
+  }
+
+  .form-card {
+    width: 270px;
+
+    .header {
+      padding: 10px 20px;
+
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+    }
+
+    .form {
+      padding: 20px 20px;
+
+      .form-control {
+        label {
+          font-size: .8rem;
+        }
+        input {
+          font-size: .9rem;
+        }
+        small {
+          font-size: .7rem;
+        }
+      }
+    }
+
+    .card-buttons {
+      padding: 20px 20px;
+
+      .card-btn {
+        font-size: .9rem;
+      }
+    }
+  }
+
+  .confirm {
+    .confirm-card {
+      width: 100%;
+
+      .header {
+        padding: 10px 10px;
+      }
+
+      .body {
+        padding: 10px 10px;
+
+        .user-info {
+          h3 {
+            font-size: .7rem;
+          }
+          h2 {
+            font-size: .9rem;
+          }
+        }
+        .pizzas-container {
+          .pizza-item {
+            h3 {
+              font-size: .7rem;
+            }
+            h2 {
+              font-size: .9rem;
+            }
+          }
+        }
+        .card-buttons {
+          padding: 10px 10px;
+
+          .card-btn {
+            font-size: .9rem;
+          }
+        }
+      }
+    }
+  }
+
+  .success {
+    div {
+      img {
+        width: 50px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        width: 95%;
+        font-size: .9rem;
+      }
+      a {
+        padding: 5px 10px;
+        font-size: .7rem;
+      }
+    }
+  }
+
+  .login-register {
+    .container {
+      h1 {
+        font-size: 1.3rem;
+      }
+      p {
+        font-size: .8rem;
+        letter-spacing: 1px;
+      }
+      button,
+      input[type='submit'] {
+        padding: 12px 20px;
+        font-size: .7rem;
+      }
+      .form-container {
+        form {
+          .input-box {
+  
+            small {
+              font-size: .55rem;
+            }
+          }
+
+          .error {
+            width: 70%;
+            font-size: .8rem;
+          }
+        }
+      }
+      .overlay-container {
+        .overlay {
+          .overlay-panel {
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .successfully-added-pizza {
+    .success-wrapper {
+      img {
+        width: 50px;
+      }
+      h1 {
+        font-size: 1rem;
+      }
+      a, button {
+        padding: 5px 10px;
+        font-size: .7rem;
+      }
+    }
+  }
+
+  .my-orders {
+    .orders {
+      .my-orders-head {
+        p {
+          font-size: .6rem;
+          letter-spacing: 0;
+        }
+      }
+      .order-list {
+        .my-order {
+          .name {
+            font-size: .7rem;
+          }
+          .amount {
+            font-size: .7rem;
+          }
+          .price {
+            font-size: .7rem;
+          }
+          a {
+            font-size: .85rem;
+          }
+        }
+      }
+    }
+  }
+}
