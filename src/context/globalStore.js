@@ -201,7 +201,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     try {
-      const res = await axios.get('/api/auth/me')
+      const res = await axios.get('https://express-pizza-ordering-system.herokuapp.com/api/auth/me')
   
       dispatch({ type: 'LOAD_USER', payload: res.data.data })
     }

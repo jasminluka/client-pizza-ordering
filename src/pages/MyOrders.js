@@ -15,7 +15,7 @@ const MyOrders = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('/api/orders/user')
+        const res = await axios.get('https://express-pizza-ordering-system.herokuapp.com/api/orders/user')
   
         dispatch({ type: 'GET_ORDERS', payload: res.data.data })
       }

@@ -12,7 +12,7 @@ const PizzaMenu = ({ setAlert }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('/api/pizzas')
+        const res = await axios.get('https://express-pizza-ordering-system.herokuapp.com/api/pizzas')
   
         dispatch({ type: 'GET_PIZZAS', payload: res.data.pizzas })
       }

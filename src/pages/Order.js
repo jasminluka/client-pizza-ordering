@@ -11,7 +11,7 @@ const Order = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(`/api/orders/${id}`)
+        const res = await axios.get(`https://express-pizza-ordering-system.herokuapp.com/api/orders/${id}`)
   
         setOrder(res.data.data)  
       }

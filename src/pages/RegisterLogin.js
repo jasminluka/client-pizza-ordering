@@ -44,7 +44,7 @@ const RegisterLogin = () => {
     }
 
     try {
-      const res = await axios.post('/api/auth/register', data, config)
+      const res = await axios.post('https://express-pizza-ordering-system.herokuapp.com/api/auth/register', data, config)
   
       dispatch({ type: 'REGISTER_SUCCESS', payload: res.data.token })
 
@@ -68,7 +68,7 @@ const RegisterLogin = () => {
     }
 
     try {
-      const res = await axios.post('/api/auth/login', data, config)
+      const res = await axios.post('https://express-pizza-ordering-system.herokuapp.com/api/auth/login', data, config)
 
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.token })
 

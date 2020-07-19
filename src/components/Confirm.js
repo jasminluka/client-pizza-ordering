@@ -26,12 +26,12 @@ const Confirm = ({ nextStep, prevStep, setSuccessMessage }) => {
 
     try {
       if (!isAuthenticated) {
-        const res = await axios.post('/api/orders', formData, config)
+        const res = await axios.post('https://express-pizza-ordering-system.herokuapp.com/api/orders', formData, config)
 
         setSuccessMessage(res.data.success)
       }
       else {
-        const res = await axios.post('/api/orders/user', formData, config)
+        const res = await axios.post('https://express-pizza-ordering-system.herokuapp.com/api/orders/user', formData, config)
 
         setSuccessMessage(res.data.success)
       }

@@ -29,7 +29,7 @@ const Pizza = ({ _id, name, ingredients, prices, setAlert }) => {
 
   const handleRemove = async () => {
     try {
-      await axios.delete(`/api/pizzas/${_id}`)
+      await axios.delete(`https://express-pizza-ordering-system.herokuapp.com/api/pizzas/${_id}`)
 
       dispatch({ type: 'DELETE_PIZZA', payload: _id })
     }

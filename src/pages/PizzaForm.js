@@ -112,7 +112,7 @@ const PizzaForm = () => {
     }
 
     try {
-      const res = await axios.post('/api/pizzas', formData, config)
+      const res = await axios.post('https://express-pizza-ordering-system.herokuapp.com/api/pizzas', formData, config)
   
       setPizza(res.data.data)
       setSuccessMessage(res.data.success)
